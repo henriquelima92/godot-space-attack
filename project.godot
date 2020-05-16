@@ -16,7 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Space-attack"
+run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=800
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [rendering]
 
