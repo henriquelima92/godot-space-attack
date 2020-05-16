@@ -2,6 +2,11 @@ extends Area2D
 
 export(PackedScene) var projectile
 
+export(AudioStreamSample) var shoot_audio
+export(AudioStreamSample) var explosion_audio
+onready var audio =$Audio
+
+
 onready var timer = $Timer
 onready var collision = $CollisionShape2D
 
@@ -13,6 +18,9 @@ signal was_defeated
 var dead = false
 var can_shoot = true
 
+func _ready():
+	audio.stream = shoot_audio
+	
 func _process(delta):
 	if can_shoot == true:
 		_shoot()
@@ -26,6 +34,7 @@ func _shoot():
 	new_projectile.position = global_position
 	get_tree().get_root().add_child(new_projectile)
 	timer.start()
+	audio.play()
 	
 
 func add_damage(damage):
@@ -35,6 +44,8 @@ func add_damage(damage):
 		collision.queue_free()
 		hide()
 		emit_signal("was_defeated")
+		audio.stream = explosion_audio
+		audio.play()
 
 
 func _on_Timer_timeout():

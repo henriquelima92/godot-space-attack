@@ -8,6 +8,7 @@ export var health = 100
 onready var sprite = $Sprite
 onready var timer = $Timer
 onready var deathTimer = $DeathTimer
+onready var audio = $Audio
 
 var screen_size 
 var playerSize
@@ -30,6 +31,7 @@ func _process(delta):
 		new_projectile.position = position
 		get_parent().add_child(new_projectile)
 		timer.start()
+		audio.play()
 		
 	position.x = clamp(position.x, 0 + (playerSize/2), screen_size-(playerSize/2))
 
