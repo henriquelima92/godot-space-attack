@@ -4,7 +4,7 @@ export var speed = 200
 export var damage = 10
 
 func _ready():
-	connect("are_entered", self, "_on_area_entered")
+	connect("area_entered", self, "_on_area_entered")
 
 func _process(delta):
 	position.y -= speed * delta

@@ -8,6 +8,8 @@ onready var collision = $CollisionShape2D
 export var speed = 50
 export var health = 30
 
+signal was_defeated
+
 var dead = false
 var can_shoot = true
 
@@ -16,6 +18,9 @@ func _process(delta):
 		_shoot()
 
 func _shoot():
+	if dead == true:
+		return
+		
 	can_shoot = false
 	var new_projectile = projectile.instance()
 	new_projectile.position = global_position
@@ -29,6 +34,7 @@ func add_damage(damage):
 		dead = true	
 		collision.queue_free()
 		hide()
+		emit_signal("was_defeated")
 
 
 func _on_Timer_timeout():

@@ -17,7 +17,8 @@ func _spawn_formation():
 	var new_formation = formation.instance()
 	new_formation.position = Vector2(position_x, position_y)
 	add_child(new_formation)
+	new_formation.connect("formation_defeated", self, "_on_formation_defeated")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_formation_defeated():
+	_spawn_formation()
+
